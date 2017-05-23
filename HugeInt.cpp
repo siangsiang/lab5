@@ -16,13 +16,16 @@ class HugeInt{
     friend istream& operator>>(istream &in, HugeInt &x);
     friend HugeInt operator+(HugeInt l, HugeInt r);
     friend HugeInt operator-(HugeInt l, HugeInt r);
-    HugeInt& operator=(HugeInt r);
+    friend HugeInt& add(HugeInt &l, const HugeInt &r);
+    friend HugeInt& sub(HugeInt &l, const HugeInt &r);
+HugeInt& operator=(HugeInt r);
  private:
     vector<int> number;
     void buildstring(const string &s);
-    static HugeInt& add(HugeInt &l, const HugeInt &r);
-    static HugeInt& sub(HugeInt &l, const HugeInt &r); 
 };
+HugeInt& add(HugeInt &l, const HugeInt &r);
+HugeInt& sub(HugeInt &l, const HugeInt &r);
+
 HugeInt::HugeInt(){
     number.push_back(0);
 }
@@ -34,7 +37,7 @@ HugeInt::HugeInt(string s){
 }
 void HugeInt::buildstring(const string &s){
     number.clear();
-    for(int i=s.size()-1;i>=0;--i)
+    for(int i=s.size()-1;i>=0;i--)
         number.push_back(s[i]-'0');
 }
 HugeInt::HugeInt(int x){
@@ -55,16 +58,16 @@ istream& operator>>(istream &in, HugeInt &x){
     return in;
 }
 HugeInt operator+(HugeInt l, HugeInt r){
-    return HugeInt::add(l, r);
+    return add(l, r);
 }
 HugeInt operator-(HugeInt l, HugeInt r){
-    return HugeInt::sub(l, r);
+    return sub(l, r);
 }
 HugeInt& HugeInt::operator=(HugeInt r){
     this->number = r.number;
     return *this;
 }
-HugeInt& HugeInt::add(HugeInt &l, const HugeInt &r){
+HugeInt& add(HugeInt &l, const HugeInt &r){
     l.number.resize(max(l.number.size(), r.number.size()));
     for(int i=0;i<r.number.size();i++)
         l.number[i] =  l.number[i]+ r.number[i];
@@ -80,7 +83,7 @@ HugeInt& HugeInt::add(HugeInt &l, const HugeInt &r){
     }
     return l;
 }
-HugeInt& HugeInt::sub(HugeInt &l, const HugeInt &r){
+HugeInt& sub(HugeInt &l, const HugeInt &r){
     l.number.resize(max(l.number.size(), r.number.size()));
     for(int i=0;i<r.number.size();i++)
         l.number[i] = l.number[i]-r.number[i];
