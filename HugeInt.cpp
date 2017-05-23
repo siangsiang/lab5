@@ -1,11 +1,7 @@
 #include<iostream>
 #include<string>
 #include<vector>
-#include<list>
-#include<sstream>
-
 using namespace std;
-
 class HugeInt{
  public:
     HugeInt();
@@ -21,7 +17,6 @@ class HugeInt{
     vector<int> number;
     void buildstring(const string &s);
 };
-
 HugeInt::HugeInt(){
     number.push_back(0);
 }
