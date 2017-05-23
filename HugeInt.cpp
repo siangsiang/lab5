@@ -23,59 +23,48 @@ class HugeInt{
     static HugeInt& add(HugeInt &l, const HugeInt &r);
     static HugeInt& sub(HugeInt &l, const HugeInt &r); 
 };
-HugeInt::HugeInt()
-{
+HugeInt::HugeInt(){
     number.push_back(0);
 }
-HugeInt::HugeInt(const HugeInt &x)
-{
+HugeInt::HugeInt(const HugeInt &x){
     number = x.number;
 }
-HugeInt::HugeInt(string s)
-{
+HugeInt::HugeInt(string s){
     buildstring(s);
 }
-void HugeInt::buildstring(const string &s)
-{
+void HugeInt::buildstring(const string &s){
     number.clear();
     for(int i=s.size()-1;i>=0;--i)
         number.push_back(s[i]-'0');
 }
-HugeInt::HugeInt(int x)
-{
+HugeInt::HugeInt(int x){
     while(x){
       number.push_back(x%10);
       x /= 10;
     }
 }
-ostream& operator<<(ostream &out, HugeInt x)
-{
+ostream& operator<<(ostream &out, HugeInt x){
     for(int i=x.number.size()-1;i>=0;--i)
     out << x.number[i];
     return out;
 }
-istream& operator>>(istream &in, HugeInt &x)
-{
+istream& operator>>(istream &in, HugeInt &x){
     string s;
     in >> s;
     x.buildstring(s);
     return in;
 }
-HugeInt operator+(HugeInt l, HugeInt r)
-{
+HugeInt operator+(HugeInt l, HugeInt r){
     return HugeInt::add(l, r);
 }
-HugeInt operator-(HugeInt l, HugeInt r)
-{
+HugeInt operator-(HugeInt l, HugeInt r){
     return HugeInt::sub(l, r);
 }
-HugeInt& HugeInt::operator=(HugeInt r)
-{
+HugeInt& HugeInt::operator=(HugeInt r){
     this->number = r.number;
     return *this;
 }
-HugeInt& HugeInt::add(HugeInt &l, const HugeInt &r)
-{
+HugeInt& HugeInt::add(HugeInt &l, const HugeInt &r){
     l.number.resize(max(l.number.size(), r.number.size()));
     for(int i=0;i<r.number.size();++i)
         l.number[i] += r.number[i];
@@ -91,9 +80,7 @@ HugeInt& HugeInt::add(HugeInt &l, const HugeInt &r)
     }
     return l;
 }
-HugeInt& HugeInt::sub(HugeInt &l, const HugeInt &r)
-
-{
+HugeInt& HugeInt::sub(HugeInt &l, const HugeInt &r){
     l.number.resize(max(l.number.size(), r.number.size()));
     for(int i=0;i<r.number.size();++i)
         l.number[i] -= r.number[i];
